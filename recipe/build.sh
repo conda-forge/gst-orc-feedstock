@@ -6,7 +6,8 @@ BUILD_DIR="${SRC_DIR}/build"
 meson setup \
 	${BUILD_DIR} \
 	${SRC_DIR} \
-	--prefix ${PREFIX}
+	--prefix ${PREFIX} \
+	--libdir "lib"
 pushd ${BUILD_DIR}
 
 # build
