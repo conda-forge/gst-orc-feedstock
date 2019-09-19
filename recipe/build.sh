@@ -1,13 +1,19 @@
 #!/bin/bash
 
-# conda-forge/conda-forge.github.io#621
-find ${PREFIX} -name "*.la" -delete
+BUILD_DIR="${SRC_DIR}/build"
 
-# configure using PYTHON=pythonX.Y to get correct includes path
-./configure \
-	PYTHON=${PYTHON}${PY_VER} \
-	--prefix=${PREFIX}
+# configure
+meson setup \
+	${BUILD_DIR} \
+	${SRC_DIR} \
+	--prefix ${PREFIX}
+pushd ${BUILD_DIR}
 
-# make and install
-make -j${CPU_COUNT} ${VERBOSE_AT}
-make install
+# build
+ninja -j ${CPU_COUNT} all
+
+# check
+ninja test
+
+# install
+ninja install

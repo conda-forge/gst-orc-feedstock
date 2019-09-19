@@ -18,14 +18,16 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - meson
+    - ninja
 
 test:
+  requires:
+    - pkg-config  # [unix]
   commands:
     - orcc --help
     - orc-bugreport --help
-    - test -f ${PREFIX}/lib/pkgconfig/orc-0.4.pc  # [unix]
-    - conda inspect linkages -p ${PREFIX} ${PKG_NAME}  # [not win]
-    - conda inspect objects -p ${PREFIX} ${PKG_NAME}  # [osx]
+    - pkg-config --print-errors --modversion orc-0.4  # [unix]
 
 about:
   home: http://gstreamer.freedesktop.org/modules/orc.html
