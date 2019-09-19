@@ -1,6 +1,6 @@
 {% set name = "orc" %}
-{% set version = "0.4.29" %}
-{% set sha256 = "4f8901f9144b5ec17dffdb33548b5f4c7f8049b0d1023be3462cdd64ec5a3ab2" %}
+{% set version = "0.4.30" %}
+{% set sha256 = "ba41b92146a5691cd102eb79c026757d39e9d3b81a65810d2946a1786a1c4972" %}
 
 package:
   # apache orc is already registered as 'orc', so we call this gst-orc
@@ -18,14 +18,16 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - meson
+    - ninja
 
 test:
+  requires:
+    - pkg-config  # [unix]
   commands:
     - orcc --help
     - orc-bugreport --help
-    - test -f ${PREFIX}/lib/pkgconfig/orc-0.4.pc  # [unix]
-    - conda inspect linkages -p ${PREFIX} ${PKG_NAME}  # [not win]
-    - conda inspect objects -p ${PREFIX} ${PKG_NAME}  # [osx]
+    - pkg-config --print-errors --modversion orc-0.4  # [unix]
 
 about:
   home: http://gstreamer.freedesktop.org/modules/orc.html
