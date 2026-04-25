@@ -1,6 +1,6 @@
 {% set name = "orc" %}
-{% set version = "0.4.34" %}
-{% set sha256 = "8f47abb3f097171e44eb807adcdabd860fba2effd37d8d3c4fbd5f341cadd41f" %}
+{% set version = "0.4.37" %}
+{% set sha256 = "85638c0d447d989cd0d7e03406adbfbc380e67db2a622a4727a0ce3d440b2974" %}
 
 package:
   # apache orc is already registered as 'orc', so we call this gst-orc
